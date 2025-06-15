@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulacron: Memory Layer Zero</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: #111;
+      color: #eee;
+      font-family: 'Courier New', monospace;
+      overflow: hidden;
+    }
+    #game {
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: url('https://i.imgur.com/kZUl3Mh.png') no-repeat center center;
+      background-size: cover;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 80%;
+    }
+    .hidden {
+      display: none;
+    }
+    .button {
+      background: #333;
+      color: #fff;
+      border: 1px solid #888;
+      padding: 10px 20px;
+      margin-top: 15px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    .button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+<body>
+  <div id="game">
+    <div class="overlay" id="intro">
+      <p>System booting...</p>
+      <p>Welcome to the Initialization Room.</p>
+      <button class="button" onclick="startGame()">Enter</button>
+    </div>
+
+    <div class="overlay hidden" id="desk">
+      <p>You found a letter addressed to "Evelyn". It reads:</p>
+      <p><em>"I don’t know if you’ll ever read this, or if you’re even real. But if you are... look into the mirror."</em></p>
+      <button class="button" onclick="showMirror()">Look into the mirror</button>
+    </div>
+
+    <div class="overlay hidden" id="mirror">
+      <p>The mirror flickers. You see your reflection... then nothing.</p>
+      <p><em>Memory error: Subject identity unclear.</em></p>
+      <button class="button" onclick="rebootSystem()">Reboot System</button>
+    </div>
+  </div>
+
+  <script>
+    function startGame() {
+      document.getElementById('intro').classList.add('hidden');
+      document.getElementById('desk').classList.remove('hidden');
+    }
+
+    function showMirror() {
+      document.getElementById('desk').classList.add('hidden');
+      document.getElementById('mirror').classList.remove('hidden');
+    }
+
+    function rebootSystem() {
+      document.getElementById('mirror').innerHTML = "<p>System rebooting... Please wait...</p><p><em>Loading Memory Layer 01...</em></p>";
+      setTimeout(() => {
+        window.alert("To be continued in the next memory room...");
+        // Placeholder for next scene logic
+      }, 3000);
+    }
+  </script>
+</body>
+</html>
