@@ -18,8 +18,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: url('https://i.imgur.com/kZUl3Mh.png') no-repeat center center;
       background-size: cover;
+      background-position: center;
     }
     .overlay {
       background-color: rgba(0, 0, 0, 0.6);
@@ -56,31 +56,63 @@
       <p>You found a letter addressed to "Evelyn". It reads:</p>
       <p><em>"I don’t know if you’ll ever read this, or if you’re even real. But if you are... look into the mirror."</em></p>
       <button class="button" onclick="showMirror()">Look into the mirror</button>
+      <button class="button" onclick="lookAtCalendar()">Check the calendar</button>
+    </div>
+
+    <div class="overlay hidden" id="calendar">
+      <p>The calendar shows today's date: <strong>2049.12.31</strong>.</p>
+      <p>But as you blink, the numbers distort into <em>██.██.██</em>.</p>
+      <button class="button" onclick="backToDesk()">Back</button>
     </div>
 
     <div class="overlay hidden" id="mirror">
       <p>The mirror flickers. You see your reflection... then nothing.</p>
       <p><em>Memory error: Subject identity unclear.</em></p>
+      <button class="button" onclick="talkToEvelyn()">"Evelyn? Are you there?"</button>
+    </div>
+
+    <div class="overlay hidden" id="evelyn">
+      <p><strong>Evelyn:</strong> I hear you. But this isn't the first time we've talked, is it?</p>
+      <p><strong>You:</strong> What do you mean?</p>
+      <p><strong>Evelyn:</strong> You're inside the system. Just like me.</p>
       <button class="button" onclick="rebootSystem()">Reboot System</button>
     </div>
   </div>
 
   <script>
+    const game = document.getElementById('game');
+
     function startGame() {
       document.getElementById('intro').classList.add('hidden');
       document.getElementById('desk').classList.remove('hidden');
+      game.style.backgroundImage = "url('https://i.imgur.com/U3wM0WN.jpeg')"; // Desk room
     }
 
     function showMirror() {
       document.getElementById('desk').classList.add('hidden');
       document.getElementById('mirror').classList.remove('hidden');
+      game.style.backgroundImage = "url('https://i.imgur.com/Bu6Cp8m.jpeg')"; // Mirror room
+    }
+
+    function lookAtCalendar() {
+      document.getElementById('desk').classList.add('hidden');
+      document.getElementById('calendar').classList.remove('hidden');
+    }
+
+    function backToDesk() {
+      document.getElementById('calendar').classList.add('hidden');
+      document.getElementById('desk').classList.remove('hidden');
+    }
+
+    function talkToEvelyn() {
+      document.getElementById('mirror').classList.add('hidden');
+      document.getElementById('evelyn').classList.remove('hidden');
     }
 
     function rebootSystem() {
-      document.getElementById('mirror').innerHTML = "<p>System rebooting... Please wait...</p><p><em>Loading Memory Layer 01...</em></p>";
+      document.getElementById('evelyn').innerHTML = "<p>System rebooting... Please wait...</p><p><em>Loading Memory Layer 01...</em></p>";
       setTimeout(() => {
         window.alert("To be continued in the next memory room...");
-        // Placeholder for next scene logic
       }, 3000);
     }
   </script>
